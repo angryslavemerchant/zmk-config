@@ -12,8 +12,8 @@
     // TODO: Update these pin numbers for your wiring
     encoder: encoder {
         compatible = "alps,ec11";
-        a-gpios = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // TODO: Your CLK pin
-        b-gpios = <&pro_micro 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // TODO: Your DT pin
+        a-gpios = <&gpio0 X GPIO_ACTIVE_HIGH>;  // No PULL_UP
+        b-gpios = <&gpio0 Y GPIO_ACTIVE_HIGH>;  // No PULL_UP
         steps = <20>;  // TODO: Check your encoder datasheet (common: 20, 24, or 80)
         status = "okay";
     };
