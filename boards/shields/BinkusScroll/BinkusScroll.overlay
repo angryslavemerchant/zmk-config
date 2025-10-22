@@ -3,24 +3,27 @@
         zmk,kscan = &kscan0;
     };
 
-    // Minimal dummy kscan (ZMK requires this even with just encoder)
+    /* Minimal dummy kscan — choose a pin that is externally held stable */
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
-        input-gpios = <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        /* Replace CONTROLLER & PIN with a real, externally biased pin */
+        input-gpios = <&gpio0 PIN GPIO_ACTIVE_LOW>;
     };
 
-    // TODO: Update these pin numbers for your wiring
+    /* EC11 encoder: external pull-ups on the module, so no internal pulls */
     encoder: encoder {
         compatible = "alps,ec11";
-        a-gpios = <&gpio0 X GPIO_ACTIVE_HIGH>;  // No PULL_UP
-        b-gpios = <&gpio0 Y GPIO_ACTIVE_HIGH>;  // No PULL_UP
-        steps = <20>;  // TODO: Check your encoder datasheet (common: 20, 24, or 80)
+        /* Replace A_PIN / B_PIN with your wired pins */
+        a-gpios = <&gpio0 A_PIN GPIO_ACTIVE_LOW>;
+        b-gpios = <&gpio0 B_PIN GPIO_ACTIVE_LOW>;
+        steps = <20>;   /* your encoder’s detents per 360° */
         status = "okay";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder>;
-        triggers-per-rotation = <20>;  // TODO: Adjust for sensitivity
+        /* Tune to taste; often detents * 2 (or *4) depending on decoding */
+        triggers-per-rotation = <40>;
     };
 };
