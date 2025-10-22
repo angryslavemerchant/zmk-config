@@ -1,0 +1,6 @@
+if SHIELD_BinkusScroll
+
+config ZMK_KEYBOARD_NAME
+    default "BinkusScroll"
+
+endif
