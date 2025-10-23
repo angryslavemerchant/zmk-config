@@ -1,4 +1,5 @@
 #include <physical_layouts.dtsi>
+#include <dt-bindings/zmk/matrix_transform.h>
 
 / {
     chosen {
@@ -23,7 +24,9 @@
         compatible = "zmk,matrix-transform";
         columns = <1>;
         rows = <1>;
-        map = <RC(0,0)>;
+        map = 
+            RC(0,0)
+        >;
     };
 
     // Minimal dummy kscan (ZMK requires this even with just encoder)
