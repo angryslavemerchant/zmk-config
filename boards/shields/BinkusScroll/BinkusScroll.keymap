@@ -1,28 +1,53 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/pointing.h>
 
 / {
-    macros {
-        scroll_up: scroll_up {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&msc SCRL_UP>;
+    behaviors {
+        // Volume control
+        volume: volume_control {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
         };
         
-        scroll_down: scroll_down {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>;
+        // Slow scroll
+        scroll_slow: scroll_slow {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(10)>, <&msc MOVE_Y(-10)>;
+        };
+        
+        // Fast scroll
+        scroll_fast: scroll_fast {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(50)>, <&msc MOVE_Y(-50)>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
+        // Layer 0: Volume Control (default)
         default_layer {
-            bindings = <&none>;
-            sensor-bindings = <&scroll_up &scroll_down>;
+            display-name = "Volume";
+            bindings = <&to 1>;  // Button switches to slow scroll
+            sensor-bindings = <&volume>;
+        };
+        
+        // Layer 1: Slow Scroll
+        scroll_slow_layer {
+            display-name = "Scroll Slow";
+            bindings = <&to 2>;  // Button switches to fast scroll
+            sensor-bindings = <&scroll_slow>;
+        };
+        
+        // Layer 2: Fast Scroll
+        scroll_fast_layer {
+            display-name = "Scroll Fast";
+            bindings = <&to 0>;  // Button loops back to volume
+            sensor-bindings = <&scroll_fast>;
         };
     };
 };

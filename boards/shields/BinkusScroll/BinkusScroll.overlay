@@ -14,8 +14,8 @@
         compatible = "alps,ec11";
         a-gpios = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // TODO: Your CLK pin
         b-gpios = <&pro_micro 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // TODO: Your DT pin
-        steps = <80>;  // TODO: Check your encoder datasheet (common: 20, 24, or 80)
-        // status = "okay";
+        steps = <40>;  // TODO: Check your encoder datasheet (common: 20, 24, or 80)
+        status = "okay";
     };
 
     sensors: sensors {
