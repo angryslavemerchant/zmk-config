@@ -2,7 +2,7 @@
 #include <dt-bindings/zmk/keys.h>
 
 // Customize scroll speed BEFORE including pointing.h
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // Default is 10, higher = faster
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 200    // Default is 10, higher = faster
 
 #include <dt-bindings/zmk/pointing.h>
 
