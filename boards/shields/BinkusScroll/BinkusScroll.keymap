@@ -1,8 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-// Customize scroll speed BEFORE including pointing.h
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 200    // Default is 10, higher = faster
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
 #include <dt-bindings/zmk/pointing.h>
 
@@ -13,6 +12,13 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
+        };
+        
+        // TEST: Mouse clicks instead of scroll
+        test_mouse: test_mouse {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&mkp LCLK>, <&mkp RCLK>;  // Left/Right click
         };
         
         // Scroll control
@@ -26,17 +32,24 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Volume Control (default)
+        // Layer 0: Volume
         default_layer {
             display-name = "Volume";
-            bindings = <&to 1>;  // Button switches to scroll layer
+            bindings = <&to 1>;
             sensor-bindings = <&volume>;
         };
         
-        // Layer 1: Mouse Scroll
+        // Layer 1: TEST Mouse Clicks
+        test_layer {
+            display-name = "Test";
+            bindings = <&to 2>;
+            sensor-bindings = <&test_mouse>;  // Should click when you rotate
+        };
+        
+        // Layer 2: Scroll
         scroll_layer {
             display-name = "Scroll";
-            bindings = <&to 0>;  // Button switches back to volume layer
+            bindings = <&to 0>;
             sensor-bindings = <&scroll>;
         };
     };
