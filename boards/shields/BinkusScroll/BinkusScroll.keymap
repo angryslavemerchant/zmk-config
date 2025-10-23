@@ -3,12 +3,26 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
+    macros {
+        scroll_up: scroll_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&msc SCRL_UP>;
+        };
+        
+        scroll_down: scroll_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            bindings = <&msc SCRL_DOWN>;  // Pressing the dummy key = scroll
-            sensor-bindings = <&inc_dec_kp UP DOWN>;  // Encoder = just send A/B for now
+            bindings = <&none>;
+            sensor-bindings = <&scroll_up &scroll_down>;
         };
     };
 };
