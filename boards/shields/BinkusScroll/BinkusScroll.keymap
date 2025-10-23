@@ -8,7 +8,7 @@
 
         default_layer {
             bindings = <&msc SCRL_DOWN>;  // Pressing the dummy key = scroll
-            sensor-bindings = <&inc_dec_kp A B>;  // Encoder = just send A/B for now
+            sensor-bindings = <&inc_dec_kp UP DOWN>;  // Encoder = just send A/B for now
         };
     };
 };
