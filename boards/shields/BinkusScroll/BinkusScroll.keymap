@@ -1,6 +1,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+
 #include <dt-bindings/zmk/pointing.h>
 
 / {
@@ -23,7 +25,7 @@
         scroll: scroll_control {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
             tap-ms = <20>;
         };
     };
@@ -34,21 +36,21 @@
         // Layer 0: Volume
         default_layer {
             display-name = "Volume";
-            bindings = <&to 1>;
+            bindings = <&studio_unlock>;
             sensor-bindings = <&volume>;
         };
         
         // Layer 1: TEST Mouse Clicks
         test_layer {
             display-name = "Test";
-            bindings = <&to 2>;
+            bindings = <&studio_unlock>;
             sensor-bindings = <&test_mouse>;  // Should click when you rotate
         };
         
         // Layer 2: Scroll
         scroll_layer {
             display-name = "Scroll";
-            bindings = <&to 0>;
+            bindings = <&studio_unlock>;
             sensor-bindings = <&scroll>;
         };
     };
