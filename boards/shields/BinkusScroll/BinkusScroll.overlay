@@ -23,6 +23,7 @@
         compatible = "zmk,matrix-transform";
         columns = <1>;
         rows = <1>;
+        map = <0>;
     };
 
     // Minimal dummy kscan (ZMK requires this even with just encoder)
