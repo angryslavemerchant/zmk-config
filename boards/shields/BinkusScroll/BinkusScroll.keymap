@@ -1,5 +1,9 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+
+// Customize scroll speed BEFORE including pointing.h
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // Default is 10, higher = faster
+
 #include <dt-bindings/zmk/pointing.h>
 
 / {
@@ -11,18 +15,11 @@
             bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
         };
         
-        // Slow scroll
-        scroll_slow: scroll_slow {
+        // Scroll control
+        scroll: scroll_control {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(10)>, <&msc MOVE_Y(-10)>;
-        };
-        
-        // Fast scroll
-        scroll_fast: scroll_fast {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(50)>, <&msc MOVE_Y(-50)>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
         };
     };
 
@@ -32,22 +29,15 @@
         // Layer 0: Volume Control (default)
         default_layer {
             display-name = "Volume";
-            bindings = <&to 1>;  // Button switches to slow scroll
+            bindings = <&to 1>;  // Button switches to scroll layer
             sensor-bindings = <&volume>;
         };
         
-        // Layer 1: Slow Scroll
-        scroll_slow_layer {
-            display-name = "Scroll Slow";
-            bindings = <&to 2>;  // Button switches to fast scroll
-            sensor-bindings = <&scroll_slow>;
-        };
-        
-        // Layer 2: Fast Scroll
-        scroll_fast_layer {
-            display-name = "Scroll Fast";
-            bindings = <&to 0>;  // Button loops back to volume
-            sensor-bindings = <&scroll_fast>;
+        // Layer 1: Mouse Scroll
+        scroll_layer {
+            display-name = "Scroll";
+            bindings = <&to 0>;  // Button switches back to volume layer
+            sensor-bindings = <&scroll>;
         };
     };
 };
