@@ -27,7 +27,7 @@
             #sensor-binding-cells = <0>;
             /* CW uses +25, CCW uses -25 (base “chunk” per detent) */
             bindings = <&msc MOVE_Y(25)>, <&msc MOVE_Y(-25)>;
-            tap-ms = <20>;
+            tap-ms = <100>;
         };
     };
 
