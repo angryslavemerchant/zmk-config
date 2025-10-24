@@ -1,7 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20
 
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
@@ -24,7 +24,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-            tap-ms = <20>;
+            tap-ms = <50>;
         };
     };
 
@@ -63,26 +63,21 @@
 
 // Apply layer-specific scalers (must be outside root node)
 &msc_input_listener {
-    // Layer 0: 0.5x speed
-    slow {
-        layers = <0>;
-        input-processors = <&zip_wheel_scaler 1 2>;
-    };
-    // Layer 0: 1 speed
+    // Layer 1: 2x speed
     normal {
         layers = <1>;
-        input-processors = <&zip_wheel_scaler 1 1>;
+        input-processors = <&zip_wheel_scaler 2 1>;
     };
     
     // Layer 2: 4x speed
     fast {
         layers = <2>;
-        input-processors = <&zip_wheel_scaler 2 1>;
+        input-processors = <&zip_wheel_scaler 4 1>;
     };
     
     // Layer 3: 8x speed
     turbo {
         layers = <3>;
-        input-processors = <&zip_wheel_scaler 4 1>;
+        input-processors = <&zip_wheel_scaler 8 1>;
     };
 };
