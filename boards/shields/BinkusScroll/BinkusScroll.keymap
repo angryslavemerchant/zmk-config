@@ -6,6 +6,26 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
 
+&msc_input_listener {
+    // Layer 1: 2x speed
+    normal {
+        layers = <1>;
+        input-processors = <&zip_wheel_scaler 2 1>;
+    };
+    
+    // Layer 2: 4x speed
+    fast {
+        layers = <2>;
+        input-processors = <&zip_wheel_scaler 4 1>;
+    };
+    
+    // Layer 3: 8x speed
+    turbo {
+        layers = <3>;
+        input-processors = <&zip_wheel_scaler 8 1>;
+    };
+};
+
 / {
     behaviors {
         scroll: scroll_control {
@@ -15,55 +35,34 @@
         };
     };
 
-    // Apply scalers to scroll behavior per layer
-    &msc_input_listener {
-        // Layer 1: 2x speed
-        normal {
-            layers = <1>;
-            input-processors = <&zip_wheel_scaler 2 1>;
-        };
-        
-        // Layer 2: 4x speed
-        fast {
-            layers = <2>;
-            input-processors = <&zip_wheel_scaler 4 1>;
-        };
-        
-        // Layer 3: 8x speed
-        turbo {
-            layers = <3>;
-            input-processors = <&zip_wheel_scaler 8 1>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
         // Layer 0: Slow (1x)
         default_layer {
             display-name = "Slow";
-            bindings = <&to 1>;  // Press button to go to layer 1
+            bindings = <&to 1>;
             sensor-bindings = <&scroll>;
         };
         
         // Layer 1: Normal (2x)
         normal_layer {
             display-name = "Normal";
-            bindings = <&to 2>;  // Press button to go to layer 2
+            bindings = <&to 2>;
             sensor-bindings = <&scroll>;
         };
         
         // Layer 2: Fast (4x)
         fast_layer {
             display-name = "Fast";
-            bindings = <&to 3>;  // Press button to go to layer 3
+            bindings = <&to 3>;
             sensor-bindings = <&scroll>;
         };
         
         // Layer 3: Turbo (8x)
         turbo_layer {
             display-name = "Turbo";
-            bindings = <&to 0>;  // Press button to cycle back to layer 0
+            bindings = <&to 0>;
             sensor-bindings = <&scroll>;
         };
     };
