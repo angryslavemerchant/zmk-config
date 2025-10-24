@@ -1,88 +1,72 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-/* Smaller base chunk per activation; Smooth Scrolling will make <120 deltas useful */
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
 #include <dt-bindings/zmk/pointing.h>
-#include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
-    /* Scale the REL_WHEEL output; fractions work thanks to track-remainders */
-    input_processors {
-        zip_wheel_scaler: zip_wheel_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_WHEEL>;
-            track-remainders;
-        };
-    };
-
     behaviors {
-        /* Use explicit wheel deltas instead of SCRL_* */
-        scroll: scroll_control {
+        /* Separate behaviors per layer, no input processors */
+        scroll_slow: scroll_slow {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            /* CW uses +25, CCW uses -25 (base “chunk” per detent) */
-            bindings = <&msc MOVE_Y(25)>, <&msc MOVE_Y(-25)>;
-            tap-ms = <100>;
+            bindings = <&msc MOVE_Y(30)>, <&msc MOVE_Y(-30)>;   /* ~fine */
+            tap-ms = <35>;
+        };
+
+        scroll_normal: scroll_normal {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(50)>, <&msc MOVE_Y(-50)>;   /* default-ish */
+            tap-ms = <35>;
+        };
+
+        scroll_fast: scroll_fast {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(80)>, <&msc MOVE_Y(-80)>;   /* quick */
+            tap-ms = <35>;
+        };
+
+        scroll_turbo: scroll_turbo {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(140)>, <&msc MOVE_Y(-140)>; /* spicy */
+            tap-ms = <35>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        /* Layer 0: Slow (1× of 25) */
+        /* Layer 0 → Layer 1 */
         default_layer {
             display-name = "Slow";
             bindings = <&to 1>;
-            sensor-bindings = <&scroll>;
+            sensor-bindings = <&scroll_slow>;
         };
 
-        /* Layer 1: Normal (2× -> 50 per detent) */
+        /* Layer 1 → Layer 2 */
         normal_layer {
             display-name = "Normal";
             bindings = <&to 2>;
-            sensor-bindings = <&scroll>;
+            sensor-bindings = <&scroll_normal>;
         };
 
-        /* Layer 2: Fast (4× -> 100 per detent) */
+        /* Layer 2 → Layer 3 */
         fast_layer {
             display-name = "Fast";
             bindings = <&to 3>;
-            sensor-bindings = <&scroll>;
+            sensor-bindings = <&scroll_fast>;
         };
 
-        /* Layer 3: Turbo (8× -> 200 per detent) */
+        /* Layer 3 → Layer 0 */
         turbo_layer {
             display-name = "Turbo";
             bindings = <&to 0>;
-            sensor-bindings = <&scroll>;
+            sensor-bindings = <&scroll_turbo>;
         };
-    };
-};
-
-/* Per-layer scaling of REL_WHEEL output (applies to MOVE_Y deltas) */
-&msc_input_listener {
-    slow {
-        layers = <0>;
-        input-processors = <&zip_wheel_scaler 1 1>;   /* 1× => 25 */
-    };
-
-    normal {
-        layers = <1>;
-        input-processors = <&zip_wheel_scaler 2 1>;   /* 2× => 50 */
-    };
-
-    fast {
-        layers = <2>;
-        input-processors = <&zip_wheel_scaler 4 1>;   /* 4× => 100 */
-    };
-
-    turbo {
-        layers = <3>;
-        input-processors = <&zip_wheel_scaler 8 1>;   /* 8× => 200 */
     };
 };
