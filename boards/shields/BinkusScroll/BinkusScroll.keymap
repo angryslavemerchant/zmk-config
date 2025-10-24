@@ -12,29 +12,29 @@
         scroll_slow: scroll_slow {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(30)>, <&msc MOVE_Y(-30)>;   /* ~fine */
-            tap-ms = <35>;
+            bindings = <&msc MOVE_Y(80)>, <&msc MOVE_Y(-80)>;   /* ~fine */
+            tap-ms = <5>;
         };
 
         scroll_normal: scroll_normal {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(50)>, <&msc MOVE_Y(-50)>;   /* default-ish */
-            tap-ms = <35>;
+            bindings = <&msc MOVE_Y(120)>, <&msc MOVE_Y(-120)>;   /* default-ish */
+            tap-ms = <5>;
         };
 
         scroll_fast: scroll_fast {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(80)>, <&msc MOVE_Y(-80)>;   /* quick */
-            tap-ms = <35>;
+            bindings = <&msc MOVE_Y(160)>, <&msc MOVE_Y(-160)>;   /* quick */
+            tap-ms = <5>;
         };
 
         scroll_turbo: scroll_turbo {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(140)>, <&msc MOVE_Y(-140)>; /* spicy */
-            tap-ms = <35>;
+            bindings = <&msc MOVE_Y(200)>, <&msc MOVE_Y(-200)>; /* spicy */
+            tap-ms = <5>;
         };
     };
 
