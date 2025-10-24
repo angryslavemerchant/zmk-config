@@ -2,7 +2,7 @@
 #include <dt-bindings/zmk/keys.h>
 
 /* Smaller base chunk per activation; Smooth Scrolling will make <120 deltas useful */
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 25
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
@@ -27,7 +27,7 @@
             #sensor-binding-cells = <0>;
             /* CW uses +25, CCW uses -25 (base “chunk” per detent) */
             bindings = <&msc MOVE_Y(25)>, <&msc MOVE_Y(-25)>;
-            tap-ms = <100>;
+            tap-ms = <40>;
         };
     };
 
