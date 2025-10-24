@@ -4,53 +4,66 @@
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
 #include <dt-bindings/zmk/pointing.h>
+#include <input/processors.dtsi>
 
 / {
     behaviors {
-        // Volume control
-        volume: volume_control {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
-        };
-        
-        // TEST: Mouse clicks instead of scroll
-        test_mouse: test_mouse {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&mkp LCLK>, <&mkp RCLK>;  // Left/Right click
-        };
-        
-        // Scroll control
         scroll: scroll_control {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-            tap-ms = <20>;
+        };
+    };
+
+    // Apply scalers to scroll behavior per layer
+    &msc_input_listener {
+        // Layer 1: 2x speed
+        normal {
+            layers = <1>;
+            input-processors = <&zip_wheel_scaler 2 1>;
+        };
+        
+        // Layer 2: 4x speed
+        fast {
+            layers = <2>;
+            input-processors = <&zip_wheel_scaler 4 1>;
+        };
+        
+        // Layer 3: 8x speed
+        turbo {
+            layers = <3>;
+            input-processors = <&zip_wheel_scaler 8 1>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Volume
+        // Layer 0: Slow (1x)
         default_layer {
-            display-name = "Volume";
-            bindings = <&studio_unlock>;
-            sensor-bindings = <&volume>;
+            display-name = "Slow";
+            bindings = <&to 1>;  // Press button to go to layer 1
+            sensor-bindings = <&scroll>;
         };
         
-        // Layer 1: TEST Mouse Clicks
-        test_layer {
-            display-name = "Test";
-            bindings = <&studio_unlock>;
-            sensor-bindings = <&test_mouse>;  // Should click when you rotate
+        // Layer 1: Normal (2x)
+        normal_layer {
+            display-name = "Normal";
+            bindings = <&to 2>;  // Press button to go to layer 2
+            sensor-bindings = <&scroll>;
         };
         
-        // Layer 2: Scroll
-        scroll_layer {
-            display-name = "Scroll";
-            bindings = <&studio_unlock>;
+        // Layer 2: Fast (4x)
+        fast_layer {
+            display-name = "Fast";
+            bindings = <&to 3>;  // Press button to go to layer 3
+            sensor-bindings = <&scroll>;
+        };
+        
+        // Layer 3: Turbo (8x)
+        turbo_layer {
+            display-name = "Turbo";
+            bindings = <&to 0>;  // Press button to cycle back to layer 0
             sensor-bindings = <&scroll>;
         };
     };

@@ -9,7 +9,7 @@
     // Physical layout for ZMK Studio
     encoder_layout: encoder_layout {
         compatible = "zmk,physical-layout";
-        display-name = "Encoder";
+        display-name = "Default";
         transform = <&default_transform>;
         kscan = <&kscan0>;
         
