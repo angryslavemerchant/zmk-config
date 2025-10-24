@@ -65,7 +65,7 @@
 &msc_input_listener {
     // Layer 0: 0.5x speed
     slow {
-        layers = <1>;
+        layers = <0>;
         input-processors = <&zip_wheel_scaler 0.5 1>;
     };
     // Layer 0: 1 speed
