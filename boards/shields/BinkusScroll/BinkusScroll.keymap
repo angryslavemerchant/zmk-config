@@ -1,7 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 20
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
@@ -63,21 +63,26 @@
 
 // Apply layer-specific scalers (must be outside root node)
 &msc_input_listener {
-    // Layer 1: 2x speed
+    // Layer 0: 0.5x speed
+    slow {
+        layers = <1>;
+        input-processors = <&zip_wheel_scaler 0.5 1>;
+    };
+    // Layer 0: 1 speed
     normal {
         layers = <1>;
-        input-processors = <&zip_wheel_scaler 2 1>;
+        input-processors = <&zip_wheel_scaler 1 1>;
     };
     
     // Layer 2: 4x speed
     fast {
         layers = <2>;
-        input-processors = <&zip_wheel_scaler 4 1>;
+        input-processors = <&zip_wheel_scaler 2 1>;
     };
     
     // Layer 3: 8x speed
     turbo {
         layers = <3>;
-        input-processors = <&zip_wheel_scaler 8 1>;
+        input-processors = <&zip_wheel_scaler 4 1>;
     };
 };
