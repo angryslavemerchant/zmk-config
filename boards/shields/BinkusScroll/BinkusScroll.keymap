@@ -5,28 +5,20 @@
 
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
-
-&msc_input_listener {
-    // Layer 1: 2x speed
-    normal {
-        layers = <1>;
-        input-processors = <&zip_wheel_scaler 2 1>;
-    };
-    
-    // Layer 2: 4x speed
-    fast {
-        layers = <2>;
-        input-processors = <&zip_wheel_scaler 4 1>;
-    };
-    
-    // Layer 3: 8x speed
-    turbo {
-        layers = <3>;
-        input-processors = <&zip_wheel_scaler 8 1>;
-    };
-};
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
+    // Define custom wheel scaler
+    input_processors {
+        zip_wheel_scaler: zip_wheel_scaler {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_WHEEL>;
+            track-remainders;
+        };
+    };
+
     behaviors {
         scroll: scroll_control {
             compatible = "zmk,behavior-sensor-rotate";
@@ -65,5 +57,26 @@
             bindings = <&to 0>;
             sensor-bindings = <&scroll>;
         };
+    };
+};
+
+// Apply layer-specific scalers (must be outside root node)
+&msc_input_listener {
+    // Layer 1: 2x speed
+    normal {
+        layers = <1>;
+        input-processors = <&zip_wheel_scaler 2 1>;
+    };
+    
+    // Layer 2: 4x speed
+    fast {
+        layers = <2>;
+        input-processors = <&zip_wheel_scaler 4 1>;
+    };
+    
+    // Layer 3: 8x speed
+    turbo {
+        layers = <3>;
+        input-processors = <&zip_wheel_scaler 8 1>;
     };
 };
