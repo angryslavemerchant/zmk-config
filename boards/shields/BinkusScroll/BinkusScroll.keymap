@@ -13,28 +13,28 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc MOVE_Y(80)>, <&msc MOVE_Y(-80)>;   /* ~fine */
-            tap-ms = <5>;
+            tap-ms = <35>;
         };
 
         scroll_normal: scroll_normal {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc MOVE_Y(120)>, <&msc MOVE_Y(-120)>;   /* default-ish */
-            tap-ms = <5>;
+            tap-ms = <35>;
         };
 
         scroll_fast: scroll_fast {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc MOVE_Y(160)>, <&msc MOVE_Y(-160)>;   /* quick */
-            tap-ms = <5>;
+            tap-ms = <35>;
         };
 
         scroll_turbo: scroll_turbo {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc MOVE_Y(200)>, <&msc MOVE_Y(-200)>; /* spicy */
-            tap-ms = <5>;
+            tap-ms = <35>;
         };
     };
 
