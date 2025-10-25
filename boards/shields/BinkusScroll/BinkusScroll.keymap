@@ -10,7 +10,7 @@
     time-to-max-speed-ms = <0>;   /* no ramp */
     acceleration-exponent = <0>;  /* linear */
     /* Optional: faster emit cadence while held (default ~16ms) */
-    /* trigger-period-ms = <8>; */
+    trigger-period-ms = <8>;
 };
 
 / {
