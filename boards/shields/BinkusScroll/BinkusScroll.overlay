@@ -29,7 +29,7 @@
     // Minimal dummy kscan (ZMK requires this even with just encoder)
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
-        input-gpios = <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        input-gpios = <&pro_micro 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
     // Encoder configuration
