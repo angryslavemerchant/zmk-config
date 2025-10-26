@@ -32,18 +32,27 @@
         input-gpios = <&pro_micro 16 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
-    // Encoder configuration
-    encoder: encoder {
+    // Encoder 1 - Scroll Down
+    encoder_down: encoder_down {
         compatible = "alps,ec11";
         a-gpios = <&pro_micro 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         b-gpios = <&pro_micro 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        steps = <20>;
+        steps = <16>;
+        status = "okay";
+    };
+
+    // Encoder 2 - Scroll Up
+    encoder_up: encoder_up {
+        compatible = "alps,ec11";
+        a-gpios = <&pro_micro XX (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace XX with your GPIO
+        b-gpios = <&pro_micro YY (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace YY with your GPIO
+        steps = <16>;
         status = "okay";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
-        sensors = <&encoder>;
-        triggers-per-rotation = <20>;
+        sensors = <&encoder_down &encoder_up>;
+        triggers-per-rotation = <32>;
     };
 };

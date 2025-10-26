@@ -9,38 +9,66 @@
 &msc {
     time-to-max-speed-ms = <0>;   /* no ramp */
     acceleration-exponent = <0>;  /* linear */
-    /* Optional: faster emit cadence while held (default ~16ms) */
     trigger-period-ms = <8>;
 };
 
 / {
     behaviors {
-        /* Separate behaviors per layer, no input processors */
+        /* Scroll DOWN behaviors (negative values) */
         scroll_slow: scroll_slow {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(0)>, <&msc MOVE_Y(-100)>;   /* ~fine */
+            bindings = <&msc MOVE_Y(100)>, <&msc MOVE_Y(0)>;
             tap-ms = <20>;
         };
 
         scroll_normal: scroll_normal {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(0)>, <&msc MOVE_Y(-200)>;   /* default-ish */
+            bindings = <&msc MOVE_Y(200)>, <&msc MOVE_Y(0)>;
             tap-ms = <20>;
         };
 
         scroll_fast: scroll_fast {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(0)>, <&msc MOVE_Y(-400)>;   /* quick */
+            bindings = <&msc MOVE_Y(400)>, <&msc MOVE_Y(0)>;
             tap-ms = <20>;
         };
 
         scroll_turbo: scroll_turbo {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(0)>, <&msc MOVE_Y(-800)>; /* spicy */
+            bindings = <&msc MOVE_Y(800)>, <&msc MOVE_Y(0)>;
+            tap-ms = <20>;
+        };
+
+        /* Scroll UP behaviors (positive values) */
+        scroll_up_slow: scroll_up_slow {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(-100)>, <&msc MOVE_Y(0)>;
+            tap-ms = <20>;
+        };
+
+        scroll_up_normal: scroll_up_normal {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(-200)>, <&msc MOVE_Y(0)>;
+            tap-ms = <20>;
+        };
+
+        scroll_up_fast: scroll_up_fast {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(-400)>, <&msc MOVE_Y(0)>;
+            tap-ms = <20>;
+        };
+
+        scroll_up_turbo: scroll_up_turbo {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_Y(-800)>, <&msc MOVE_Y(0)>;
             tap-ms = <20>;
         };
     };
@@ -52,28 +80,28 @@
         default_layer {
             display-name = "Slow";
             bindings = <&to 1>;
-            sensor-bindings = <&scroll_slow>;
+            sensor-bindings = <&scroll_slow &scroll_up_slow>;
         };
 
         /* Layer 1 → Layer 2 */
         normal_layer {
             display-name = "Normal";
             bindings = <&to 2>;
-            sensor-bindings = <&scroll_normal>;
+            sensor-bindings = <&scroll_normal &scroll_up_normal>;
         };
 
         /* Layer 2 → Layer 3 */
         fast_layer {
             display-name = "Fast";
             bindings = <&to 3>;
-            sensor-bindings = <&scroll_fast>;
+            sensor-bindings = <&scroll_fast &scroll_up_fast>;
         };
 
         /* Layer 3 → Layer 0 */
         turbo_layer {
             display-name = "Turbo";
             bindings = <&to 0>;
-            sensor-bindings = <&scroll_turbo>;
+            sensor-bindings = <&scroll_turbo &scroll_up_turbo>;
         };
     };
 };
