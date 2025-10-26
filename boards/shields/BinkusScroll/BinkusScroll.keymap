@@ -18,28 +18,28 @@
         scroll_slow: scroll_slow {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(100)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(100)>, <&msc MOVE_Y(-100)>;
             tap-ms = <20>;
         };
 
         scroll_normal: scroll_normal {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(200)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(200)>, <&msc MOVE_Y(-200)>;
             tap-ms = <20>;
         };
 
         scroll_fast: scroll_fast {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(400)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(400)>, <&msc MOVE_Y(-400)>;
             tap-ms = <20>;
         };
 
         scroll_turbo: scroll_turbo {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(800)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(800)>, <&msc MOVE_Y(-800)>;
             tap-ms = <20>;
         };
 
@@ -47,28 +47,28 @@
         scroll_up_slow: scroll_up_slow {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(-100)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(-100)>, <&msc MOVE_Y(100)>;
             tap-ms = <20>;
         };
 
         scroll_up_normal: scroll_up_normal {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(-200)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(-200)>, <&msc MOVE_Y(200)>;
             tap-ms = <20>;
         };
 
         scroll_up_fast: scroll_up_fast {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(-400)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(-400)>, <&msc MOVE_Y(400)>;
             tap-ms = <20>;
         };
 
         scroll_up_turbo: scroll_up_turbo {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(-800)>, <&msc MOVE_Y(0)>;
+            bindings = <&msc MOVE_Y(-800)>, <&msc MOVE_Y(800)>;
             tap-ms = <20>;
         };
     };
