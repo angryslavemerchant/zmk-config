@@ -1,5 +1,10 @@
 #include <physical_layouts.dtsi>
 
+&ext_power {
+    status = "okay";
+    init-delay-ms = <10>;
+};
+
 / {
     chosen {
         zmk,kscan = &kscan0;
@@ -37,7 +42,7 @@
         compatible = "alps,ec11";
         a-gpios = <&pro_micro 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         b-gpios = <&pro_micro 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        steps = <40>;
+        steps = <16>;
         status = "okay";
     };
 
@@ -46,13 +51,13 @@
         compatible = "alps,ec11";
         a-gpios = <&pro_micro 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace XX with your GPIO
         b-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace YY with your GPIO
-        steps = <40>;
+        steps = <16>;
         status = "okay";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder_up &encoder_down>;
-        triggers-per-rotation = <80>;
+        triggers-per-rotation = <32>;
     };
 };
