@@ -44,8 +44,8 @@
     // Encoder 2 - Scroll Up
     encoder_up: encoder_up {
         compatible = "alps,ec11";
-        a-gpios = <&pro_micro XX (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace XX with your GPIO
-        b-gpios = <&pro_micro YY (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace YY with your GPIO
+        a-gpios = <&pro_micro 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace XX with your GPIO
+        b-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // Replace YY with your GPIO
         steps = <16>;
         status = "okay";
     };
