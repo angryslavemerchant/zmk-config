@@ -1,10 +1,5 @@
 #include <physical_layouts.dtsi>
 
-&ext_power {
-    status = "okay";
-    init-delay-ms = <10>;
-};
-
 / {
     chosen {
         zmk,kscan = &kscan0;
